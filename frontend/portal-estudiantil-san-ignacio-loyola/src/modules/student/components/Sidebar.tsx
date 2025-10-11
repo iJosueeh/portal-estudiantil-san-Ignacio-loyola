@@ -1,4 +1,5 @@
 import { type ElementType, type Dispatch, type SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
 import logotipo from "../../../assets/logotipo.jpg";
 import {
   Home,
@@ -8,6 +9,7 @@ import {
   MessageSquare,
   FileText,
   X,
+  LogOut,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -107,42 +109,60 @@ const SidebarContent = ({
   activeTab,
   setActiveTab,
   setSidebarOpen,
-}: Omit<SidebarProps, "isSidebarOpen">) => (
-  <>
-    <div className="p-5 border-b border-blue-600 flex items-center justify-between">
-      <div className="flex items-center gap-3">
-        <img src={logotipo} alt="Logotipo" className="w-10 h-10 rounded-lg" />
-        <div>
-          <h2 className="font-semibold text-sm leading-tight">
-            Colegio Parroquial San Ignacio
-          </h2>
-          <p className="text-[10px] text-blue-200">Portal Estudiantil</p>
+}: Omit<SidebarProps, "isSidebarOpen">) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/login");
+    setSidebarOpen(false);
+  };
+
+  return (
+    <>
+      <div className="p-5 border-b border-blue-600 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <img src={logotipo} alt="Logotipo" className="w-10 h-10 rounded-lg" />
+          <div>
+            <h2 className="font-semibold text-sm leading-tight">
+              Colegio Parroquial San Ignacio
+            </h2>
+            <p className="text-[10px] text-blue-200">Portal Estudiantil</p>
+          </div>
         </div>
+        <button
+          onClick={() => setSidebarOpen(false)}
+          className="lg:hidden p-1 text-blue-200 hover:text-white"
+        >
+          <X size={20} />
+        </button>
       </div>
-      <button
-        onClick={() => setSidebarOpen(false)}
-        className="lg:hidden p-1 text-blue-200 hover:text-white"
-      >
-        <X size={20} />
-      </button>
-    </div>
 
-    <nav className="flex-1 mt-4 px-2">
-      {menuItems.map((item) => (
+      <nav className="flex-1 mt-4 px-2">
+        {menuItems.map((item) => (
+          <SidebarItem
+            key={item.id}
+            item={item}
+            isActive={activeTab === item.id}
+            onClick={() => {
+              setActiveTab(item.id);
+              setSidebarOpen(false);
+            }}
+          />
+        ))}
+      </nav>
+
+      <div className="mt-auto px-2 pb-4">
         <SidebarItem
-          key={item.id}
-          item={item}
-          isActive={activeTab === item.id}
-          onClick={() => {
-            setActiveTab(item.id);
-            setSidebarOpen(false);
-          }}
+          key="logout"
+          item={{ id: "logout", label: "Cerrar Sesión", icon: LogOut }}
+          isActive={false}
+          onClick={handleLogout}
         />
-      ))}
-    </nav>
+      </div>
 
-    <div className="text-center py-3 text-[11px] text-blue-200 border-t border-blue-600">
-      © 2025 San Ignacio
-    </div>
-  </>
-);
+      <div className="text-center py-3 text-[11px] text-blue-200 border-t border-blue-600">
+        © 2025 San Ignacio
+      </div>
+    </>
+  );
+};
