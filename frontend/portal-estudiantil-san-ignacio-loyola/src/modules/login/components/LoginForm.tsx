@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Logotipo from "../../../assets/logotipo.jpg";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginForm() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    tipoUsuario: "",
-    email: "",
-    password: "",
+    tipoUsuario: "alumno",
+    email: "estudiante@sil.com",
+    password: "123456",
   });
 
   const handleChange = (
@@ -17,8 +19,16 @@ export default function LoginForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Datos enviados:", formData);
-    // authService.login(formData)
+    if (
+      formData.tipoUsuario === "alumno" &&
+      formData.email === "estudiante@sil.com" &&
+      formData.password === "123456"
+    ) {
+      console.log("Inicio de sesión exitoso, redirigiendo...");
+      navigate("/dashboard");
+    } else {
+      alert("Credenciales incorrectas o campos vacíos. Intente de nuevo.");
+    }
   };
 
   return (
