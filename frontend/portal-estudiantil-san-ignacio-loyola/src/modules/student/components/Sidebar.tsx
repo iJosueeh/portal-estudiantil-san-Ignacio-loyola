@@ -11,14 +11,12 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
-// --- TIPOS ---
 type MenuItemType = {
   id: string;
   label: string;
   icon: ElementType;
 };
 
-// Se añaden props para controlar la visibilidad en móvil
 type SidebarProps = {
   activeTab: string;
   setActiveTab: (tab: string) => void;
@@ -32,7 +30,6 @@ type SidebarItemProps = {
   onClick: () => void;
 };
 
-// --- DATOS ---
 const menuItems: MenuItemType[] = [
   { id: "panel", label: "Panel Principal", icon: Home },
   { id: "cursos", label: "Mis Cursos", icon: BookOpen },
@@ -42,7 +39,6 @@ const menuItems: MenuItemType[] = [
   { id: "tramites", label: "Trámites", icon: FileText },
 ];
 
-// --- SUB-COMPONENTES ---
 const SidebarItem = ({ item, isActive, onClick }: SidebarItemProps) => {
   const Icon = item.icon;
   return (
@@ -62,7 +58,6 @@ const SidebarItem = ({ item, isActive, onClick }: SidebarItemProps) => {
   );
 };
 
-// --- COMPONENTE PRINCIPAL ---
 export const Sidebar = ({
   activeTab,
   setActiveTab,
@@ -71,10 +66,8 @@ export const Sidebar = ({
 }: SidebarProps) => {
   return (
     <AnimatePresence>
-      {/* El Sidebar se renderiza condicionalmente en móvil */}
       {isSidebarOpen && (
         <motion.div key="mobile-sidebar-wrapper">
-          {/* Fondo oscuro para cerrar al hacer clic fuera */}
           <motion.div
             onClick={() => setSidebarOpen(false)}
             initial={{ opacity: 0 }}
@@ -90,21 +83,31 @@ export const Sidebar = ({
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className="fixed top-0 left-0 h-full w-64 bg-gradient-to-b from-blue-900 via-blue-800 to-blue-700 text-white flex flex-col shadow-lg z-30 lg:hidden"
           >
-            <SidebarContent activeTab={activeTab} setActiveTab={setActiveTab} setSidebarOpen={setSidebarOpen} />
+            <SidebarContent
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+              setSidebarOpen={setSidebarOpen}
+            />
           </motion.aside>
         </motion.div>
       )}
 
-      {/* Sidebar estático para pantallas grandes */}
       <aside className="hidden w-52 bg-gradient-to-b from-blue-900 via-blue-800 to-blue-700 text-white min-h-screen lg:flex flex-col shadow-lg">
-        <SidebarContent activeTab={activeTab} setActiveTab={setActiveTab} setSidebarOpen={setSidebarOpen} />
+        <SidebarContent
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          setSidebarOpen={setSidebarOpen}
+        />
       </aside>
     </AnimatePresence>
   );
 };
 
-// Se extrae el contenido del Sidebar para no duplicar código
-const SidebarContent = ({ activeTab, setActiveTab, setSidebarOpen }: Omit<SidebarProps, 'isSidebarOpen'>) => (
+const SidebarContent = ({
+  activeTab,
+  setActiveTab,
+  setSidebarOpen,
+}: Omit<SidebarProps, "isSidebarOpen">) => (
   <>
     <div className="p-5 border-b border-blue-600 flex items-center justify-between">
       <div className="flex items-center gap-3">
@@ -116,7 +119,6 @@ const SidebarContent = ({ activeTab, setActiveTab, setSidebarOpen }: Omit<Sideba
           <p className="text-[10px] text-blue-200">Portal Estudiantil</p>
         </div>
       </div>
-      {/* Botón para cerrar en móvil */}
       <button
         onClick={() => setSidebarOpen(false)}
         className="lg:hidden p-1 text-blue-200 hover:text-white"
@@ -133,7 +135,7 @@ const SidebarContent = ({ activeTab, setActiveTab, setSidebarOpen }: Omit<Sideba
           isActive={activeTab === item.id}
           onClick={() => {
             setActiveTab(item.id);
-            setSidebarOpen(false); // Cierra el menú en móvil al seleccionar
+            setSidebarOpen(false);
           }}
         />
       ))}

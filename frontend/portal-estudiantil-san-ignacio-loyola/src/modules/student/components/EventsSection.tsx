@@ -20,7 +20,6 @@ interface EventItemProps {
   index: number;
 }
 
-// --- Sub-componente para cada Evento ---
 const EventItem = ({ event, index }: EventItemProps) => {
   const Icon = event.icon;
   return (
@@ -43,7 +42,6 @@ const EventItem = ({ event, index }: EventItemProps) => {
   );
 };
 
-// --- Componente Principal Refactorizado ---
 export const EventsSection = ({ events }: EventsSectionProps) => {
   return (
     <motion.div

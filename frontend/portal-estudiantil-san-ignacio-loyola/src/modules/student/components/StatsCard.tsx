@@ -25,6 +25,7 @@ export const StatsCard = ({ icon, value, label, color }: StatsCardProps) => {
       initial={{ opacity: 0, y: 15 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
+      whileHover={{ scale: 1.03, boxShadow: "0px 8px 16px rgba(0, 0, 0, 0.1)" }}
       className={`${colorClass} rounded-lg p-5 shadow-sm`}
     >
       <div className="flex items-center gap-3">

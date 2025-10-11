@@ -16,8 +16,6 @@ import {
   Shield,
 } from "lucide-react";
 
-// --- DATOS DE EJEMPLO ---
-
 interface StudentData {
   name: string;
   level: string;
@@ -70,8 +68,6 @@ const eventsData = [
     iconBgColor: "bg-red-500",
   },
 ];
-
-// --- COMPONENTE PRINCIPAL ---
 
 export const DashboardPage = () => {
   const [activeTab, setActiveTab] = useState("panel");
