@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { Login } from "../modules/login/pages/Login";
+import { Login } from "../modules/auth/pages/Login";
 import { DashboardPage } from "../modules/student/pages/DashboardPage";
 
 export const AppRoutes = () => {
