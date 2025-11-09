@@ -7,18 +7,36 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Dependencies
+node_modules/
+target/ # Maven build output
+build/ # Gradle build output (common, even if not used here)
 
-# Editor directories and files
+# Distribution
+dist/
+dist-ssr/
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+
+# IDE and editor files
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
+*.iml # IntelliJ IDEA files
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+.classpath
+.project
+.settings/
+
+# OS generated files
+.local
+tmp/
+temp/

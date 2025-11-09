@@ -1,0 +1,37 @@
+# Declare files that are generated and should not be attributed to the project's language statistics
+# Frontend build artifacts
+/frontend/portal-estudiantil-san-ignacio-loyola/dist/** linguist-generated
+/frontend/portal-estudiantil-san-ignacio-loyola/dist-ssr/** linguist-generated
+
+# Backend build artifacts
+/backend/target/** linguist-generated
+
+# Dependency lock files
+/frontend/portal-estudiantil-san-ignacio-loyola/package-lock.json linguist-generated
+/frontend/portal-estudiantil-san-ignacio-loyola/yarn.lock linguist-generated # If yarn is used
+
+# Wrapper scripts
+/backend/mvnw linguist-generated
+/backend/mvnw.cmd linguist-generated
+
+# Vendor directories (dependencies)
+/frontend/portal-estudiantil-san-ignacio-loyola/node_modules/ linguist-vendored
+
+# Set default line endings to LF for text files
+* text=auto eol=lf
+
+# Enforce specific line endings for certain file types
+*.java text eol=lf
+*.js text eol=lf
+*.jsx text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.json text eol=lf
+*.css text eol=lf
+*.scss text eol=lf
+*.html text eol=lf
+*.xml text eol=lf
+*.md text eol=lf
+*.properties text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
