@@ -1,4 +1,3 @@
-
 import { ProgressBar } from "@/shared/components/ProgressBar";
 import React from "react";
 import { Card } from "@/shared/components/Card";
@@ -21,32 +20,32 @@ export const CycleProgress: React.FC<CycleProgressProps> = ({
   return (
     <Card>
       <div className="flex items-center justify-between mb-6">
-        <h3 className="text-lg font-semibold text-gray-800">
+        <h3 className="text-xl font-bold text-primary">
           Progreso del Ciclo Actual
         </h3>
-        <span className="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-medium rounded-full">
+        <span className="px-3 py-1 bg-primary/10 text-primary text-sm font-semibold rounded-full">
           {cycleName}
         </span>
       </div>
       <div className="mb-4">
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm text-gray-600">Completado</span>
-          <span className="text-sm font-semibold text-blue-600">{progress}%</span>
+          <span className="text-md text-neutral-600">Completado</span>
+          <span className="text-md font-bold text-primary">{progress}%</span>
         </div>
-        <ProgressBar percentage={progress} color="blue" />
+        <ProgressBar percentage={progress} color="primary" />
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-6 border-t border-neutral-200 pt-4">
         <div>
-          <div className="text-xs text-gray-500 mb-1">Inicio del ciclo</div>
-          <div className="text-sm font-medium text-gray-800">{startDate}</div>
+          <div className="text-sm text-neutral-500 mb-1">Inicio del ciclo</div>
+          <div className="text-md font-semibold text-neutral-800">{startDate}</div>
         </div>
         <div>
-          <div className="text-xs text-gray-500 mb-1">Fin del ciclo</div>
-          <div className="text-sm font-medium text-gray-800">{endDate}</div>
+          <div className="text-sm text-neutral-500 mb-1">Fin del ciclo</div>
+          <div className="text-md font-semibold text-neutral-800">{endDate}</div>
         </div>
         <div>
-          <div className="text-xs text-gray-500 mb-1">Días restantes</div>
-          <div className="text-sm font-medium text-gray-800">{remainingDays} días</div>
+          <div className="text-sm text-neutral-500 mb-1">Días restantes</div>
+          <div className="text-md font-semibold text-neutral-800">{remainingDays} días</div>
         </div>
       </div>
     </Card>

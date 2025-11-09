@@ -4,59 +4,53 @@ import { Card } from "@/shared/components/Card";
 
 interface EventCardProps {
   event: Event;
+  onViewDetails: () => void; // Added onViewDetails prop
 }
 
-export const EventCard: React.FC<EventCardProps> = ({ event }) => {
-  const bgColors = {
-    red: "bg-red-50 border-red-200",
-    blue: "bg-blue-50 border-blue-200",
-    green: "bg-green-50 border-green-200",
+export const EventCard: React.FC<EventCardProps> = ({ event, onViewDetails }) => {
+  const themeColors: { [key: string]: string } = {
+    blue: "text-primary",
+    green: "text-accent",
+    red: "text-secondary",
   };
 
-  const textColors = {
-    red: "text-red-600",
-    blue: "text-blue-600",
-    green: "text-green-600",
+  const themeBgColors: { [key: string]: string } = {
+    blue: "bg-primary/10",
+    green: "bg-accent/10",
+    red: "bg-secondary/10",
   };
 
-  const titleColors = {
-    red: "text-red-900",
-    blue: "text-blue-900",
-    green: "text-green-900",
-  };
-
-  const subtitleColors = {
-    red: "text-red-700",
-    blue: "text-blue-700",
-    green: "text-green-700",
-  };
+  const textColor = themeColors[event.color] || "text-neutral-800";
+  const bgColor = themeBgColors[event.color] || "bg-neutral-100";
 
   return (
-    <Card className={`flex gap-4 ${bgColors[event.color]}`}>
-      <div className="text-center flex-shrink-0">
-        <div className={`text-2xl font-bold ${textColors[event.color]}`}>
-          {event.day}
-        </div>
-        <div className={`text-xs ${textColors[event.color]} uppercase`}>
-          {event.month}
-        </div>
-      </div>
-      <div className="flex-1 min-w-0">
-        <div
-          className={`font-semibold text-sm ${titleColors[event.color]} mb-1`}
-        >
-          {event.title}
-        </div>
-        {event.subtitle && (
-          <div className={`text-xs ${subtitleColors[event.color]}`}>
-            {event.subtitle}
+    <Card className="hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer" onClick={onViewDetails}>
+      <div className={`flex gap-4 p-4 rounded-xl ${bgColor}`}>
+        <div className="text-center flex-shrink-0">
+          <div className={`text-2xl font-bold ${textColor}`}>
+            {event.day}
           </div>
-        )}
-        {event.time && (
-          <div className={`text-xs ${subtitleColors[event.color]} mt-1`}>
-            {event.time}
+          <div className={`text-xs ${textColor} uppercase`}>
+            {event.month}
           </div>
-        )}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div
+            className={`font-semibold text-sm text-primary mb-1`}
+          >
+            {event.title}
+          </div>
+          {event.subtitle && (
+            <div className={`text-xs text-neutral-600`}>
+              {event.subtitle}
+            </div>
+          )}
+          {event.time && (
+            <div className={`text-xs text-neutral-600 mt-1`}>
+              {event.time}
+            </div>
+          )}
+        </div>
       </div>
     </Card>
   );

@@ -9,7 +9,7 @@ interface CoursesListProps {
 export const CoursesList: React.FC<CoursesListProps> = ({ courses }) => {
   return (
     <Card>
-      <h3 className="text-lg font-semibold text-gray-800 mb-6">Mis Cursos</h3>
+      <h3 className="text-xl font-bold text-primary mb-6">Mis Cursos</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {courses.map((course) => (
           <CourseCard key={course.id} course={course} />

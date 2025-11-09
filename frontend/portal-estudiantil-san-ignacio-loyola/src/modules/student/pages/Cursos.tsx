@@ -8,13 +8,13 @@ import { Card } from "@/shared/components/Card";
 export const Cursos = () => {
   return (
     <Card className="p-6">
-      <h1 className="text-2xl font-semibold text-gray-800 mb-6">Mis Cursos</h1>
+      <h1 className="text-3xl font-bold text-primary mb-6">Mis Cursos</h1>
       {/* Info banner */}
       <InfoBanner
         icon={BookMarked}
-        color="blue"
+        color="primary"
         message={
-          <p className="text-sm text-blue-800">
+          <p className="text-sm text-primary">
             <span className="font-semibold">Ciclo I - En progreso:</span>{" "}
             Tienes {coursesData.length} cursos activos este ciclo. Mantén un buen ritmo de
             estudio para alcanzar tus objetivos.

@@ -1,4 +1,3 @@
-
 import React from "react";
 import { EventCard } from "../calendar/EventCard";
 import { Calendar } from "lucide-react";
@@ -13,8 +12,8 @@ export const EventsList: React.FC<EventsListProps> = ({ events }) => {
   return (
     <Card>
       <div className="flex items-center gap-2 mb-6">
-        <Calendar className="w-5 h-5 text-gray-700" />
-        <h3 className="text-lg font-semibold text-gray-800">
+        <Calendar className="w-5 h-5 text-primary" />
+        <h3 className="text-xl font-bold text-primary">
           Próximos Eventos
         </h3>
       </div>
