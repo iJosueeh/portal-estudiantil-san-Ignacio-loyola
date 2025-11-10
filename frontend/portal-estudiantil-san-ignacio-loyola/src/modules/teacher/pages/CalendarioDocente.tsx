@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card } from '@/shared/components/Card';
 import { ChevronLeft, ChevronRight, CalendarDays, Clock, MapPin } from 'lucide-react';
 import { EventCard } from '../../student/components/calendar/EventCard'; // Reusing the EventCard from student components
@@ -221,7 +221,7 @@ export const CalendarioDocente = () => {
                   id: event.id,
                   title: event.title,
                   subtitle: event.subtitle,
-                  day: new Date(event.fullDate).getDate(),
+                  day: String(new Date(event.fullDate).getDate()),
                   month: new Date(event.fullDate).toLocaleString('es-ES', { month: 'short' }),
                   color: event.color,
                   time: event.time,

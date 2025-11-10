@@ -1,4 +1,3 @@
-import React from "react";
 import { Bell } from "lucide-react";
 import { ArrowLeft } from "lucide-react";
 import { Card } from "@/shared/components/Card";

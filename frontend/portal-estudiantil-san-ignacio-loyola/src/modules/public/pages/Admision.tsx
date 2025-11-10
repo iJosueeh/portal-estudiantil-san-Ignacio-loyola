@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { User, Mail, Phone, Calendar, BookOpen, GraduationCap, CheckCircle, ArrowRight } from 'lucide-react';
+import { User, Mail, Phone, Calendar, BookOpen, GraduationCap, CheckCircle } from 'lucide-react';
 import ImgAdmision from '@/assets/img-hero.jpg'; // Reusing hero image for now, can be replaced
 
 export const Admision = () => {

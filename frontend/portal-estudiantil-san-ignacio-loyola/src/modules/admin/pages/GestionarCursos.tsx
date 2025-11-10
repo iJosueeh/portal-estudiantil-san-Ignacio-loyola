@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card } from '@/shared/components/Card';
 import { BookOpen, User, Edit, Trash2, PlusCircle, Search } from 'lucide-react';
 import { Modal } from '@/shared/components/Modal'; // Import the Modal component

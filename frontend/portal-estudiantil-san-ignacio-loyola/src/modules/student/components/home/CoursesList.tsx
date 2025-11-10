@@ -1,9 +1,9 @@
 import { CourseCard } from "../courses/CourseCard";
-import type { Course } from "@/shared/types/course.types";
+import type { StudentCourse } from "../../types/student-course.types";
 import { Card } from "@/shared/components/Card";
 
 interface CoursesListProps {
-  courses: Course[];
+  courses: StudentCourse[];
 }
 
 export const CoursesList: React.FC<CoursesListProps> = ({ courses }) => {

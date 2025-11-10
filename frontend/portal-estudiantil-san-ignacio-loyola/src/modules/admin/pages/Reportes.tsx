@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card } from '@/shared/components/Card';
-import { BarChart2, Users, BookOpen, Award, CalendarDays, FileText, Download } from 'lucide-react'; // Added Download icon
+import { FileText, Download } from 'lucide-react'; // Added Download icon
 import {
   BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
   PieChart, Pie, Cell, LineChart, Line
@@ -162,7 +162,7 @@ export const Reportes = () => {
                   fill="#8884d8"
                   dataKey="value"
                   nameKey="name"
-                  label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+                  label={({ name, percent }: { name?: string; percent?: number }) => `${name || ''} ${((percent || 0) * 100).toFixed(0)}%`}
                 >
                   {selectedReport.data.map((entry: any, index: number) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />

@@ -11,8 +11,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class MessageDto {
     private Long id;
-    private Long senderId;    // Reference to Sender User's ID
-    private Long recipientId; // Reference to Recipient User's ID
+    private Long senderId;
+    private Long recipientId;
     private String subject;
     private String body;
     private LocalDateTime sentDate;

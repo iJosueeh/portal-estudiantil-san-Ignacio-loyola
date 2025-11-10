@@ -4,6 +4,13 @@ import App from './App.tsx'
 import "./styles/index.css"
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // Import AOS CSS
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+
+// Create a client
+const queryClient = new QueryClient();
 
 AOS.init({
   duration: 1000, // values from 0 to 3000, with step 50ms
@@ -12,6 +19,8 @@ AOS.init({
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>
   </StrictMode>,
 )

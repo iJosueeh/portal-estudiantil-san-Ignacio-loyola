@@ -1,5 +1,4 @@
 
-import React from 'react';
 import { CycleProgress } from "../components/home/CycleProgress";
 import { CoursesList } from "../components/home/CoursesList";
 import { StatsCard } from "../components/home/StatsCard";

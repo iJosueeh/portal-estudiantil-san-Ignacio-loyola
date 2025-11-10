@@ -12,8 +12,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class EnrollmentDto {
     private Long id;
-    private Long studentId; // Reference to Student's ID
-    private Long courseId;  // Reference to Course's ID
+    private Long studentId;
+    private Long courseId;
     private LocalDate enrollmentDate;
     private Enrollment.EnrollmentStatus status;
 }

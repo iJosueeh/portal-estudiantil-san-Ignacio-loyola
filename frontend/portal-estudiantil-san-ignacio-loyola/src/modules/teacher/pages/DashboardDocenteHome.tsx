@@ -1,6 +1,5 @@
-import React from 'react';
 import { Card } from '@/shared/components/Card';
-import { BookOpen, Award, CalendarDays, Mail, Users, Clock } from 'lucide-react';
+import { BookOpen, Mail, Users, Clock } from 'lucide-react';
 import { StatsCard } from '../../student/components/home/StatsCard'; // Reusing student's StatsCard
 import { EventCard } from '../../student/components/calendar/EventCard'; // Reusing student's EventCard
 
@@ -92,27 +91,35 @@ export const DashboardDocenteHome = () => {
       {/* Quick Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatsCard
+          id="teacher-stat-students"
           value={mockTeacherData.courses.reduce((acc, curr) => acc + curr.students, 0).toString()}
           label="Total Estudiantes"
-          icon={Users}
+          subtitle=""
+          icon={Users as React.ElementType}
           color="blue"
         />
         <StatsCard
+          id="teacher-stat-pending-tasks"
           value={mockTeacherData.courses.reduce((acc, curr) => acc + curr.pendingTasksToReview, 0).toString()}
           label="Tareas Pendientes"
-          icon={BookOpen}
+          subtitle=""
+          icon={BookOpen as React.ElementType}
           color="orange"
         />
         <StatsCard
+          id="teacher-stat-upcoming-classes"
           value={mockTeacherData.upcomingClasses.length.toString()}
           label="Clases Próximas"
-          icon={Clock}
+          subtitle=""
+          icon={Clock as React.ElementType}
           color="green"
         />
         <StatsCard
+          id="teacher-stat-new-messages"
           value={mockTeacherData.pendingMessages.toString()}
           label="Mensajes Nuevos"
-          icon={Mail}
+          subtitle=""
+          icon={Mail as React.ElementType}
           color="red"
         />
       </div>

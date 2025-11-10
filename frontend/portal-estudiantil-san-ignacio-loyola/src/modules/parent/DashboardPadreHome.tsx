@@ -1,6 +1,5 @@
-import React from 'react';
 import { Card } from '@/shared/components/Card';
-import { User, BookOpen, Award, CalendarDays, Clock, Mail } from 'lucide-react';
+import { BookOpen, Award, CalendarDays, Mail } from 'lucide-react';
 import { StatsCard } from '../student/components/home/StatsCard'; // Corrected import path
 import { EventCard } from '../student/components/calendar/EventCard'; // Corrected import path
 import { Link } from "react-router-dom"; // Import Link
@@ -101,21 +100,27 @@ export const DashboardPadreHome = () => {
           {/* Child Stats */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
             <StatsCard
+              id={`child-${child.id}-latest-grade`}
               value={child.latestGrade.toFixed(1)}
               label="Última Nota"
-              icon={Award}
+              subtitle=""
+              icon={Award as React.ElementType}
               color={child.latestGrade >= 14 ? 'green' : 'red'}
             />
             <StatsCard
+              id={`child-${child.id}-pending-tasks`}
               value={child.pendingTasks.toString()}
               label="Tareas Pendientes"
-              icon={BookOpen}
+              subtitle=""
+              icon={BookOpen as React.ElementType}
               color={child.pendingTasks > 0 ? 'orange' : 'blue'}
             />
             <StatsCard
+              id={`child-${child.id}-upcoming-events`}
               value={child.upcomingEvents.toString()}
               label="Eventos Próximos"
-              icon={CalendarDays}
+              subtitle=""
+              icon={CalendarDays as React.ElementType}
               color={child.upcomingEvents > 0 ? 'purple' : 'blue'}
             />
           </div>

@@ -12,8 +12,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TaskSubmissionDto {
     private Long id;
-    private Long taskId;    // Reference to Task's ID
-    private Long studentId; // Reference to Student's ID
+    private Long taskId;
+    private Long studentId;
     private LocalDateTime submissionDate;
     private String submissionContent;
     private TaskSubmission.SubmissionStatus status;

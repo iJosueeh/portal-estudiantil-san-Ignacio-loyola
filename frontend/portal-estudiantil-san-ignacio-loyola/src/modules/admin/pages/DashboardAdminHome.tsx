@@ -1,6 +1,5 @@
-import React from 'react';
 import { Card } from '@/shared/components/Card';
-import { Users, BookOpen, CalendarDays, BarChart2, Mail, AlertTriangle } from 'lucide-react';
+import { Users, BookOpen, CalendarDays, Mail, AlertTriangle } from 'lucide-react';
 import { StatsCard } from '../../student/components/home/StatsCard'; // Reusing student's StatsCard
 
 // Mock Data for Admin Dashboard
@@ -44,27 +43,35 @@ export const DashboardAdminHome = () => {
       {/* Key Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatsCard
+          id="admin-stat-students"
           value={mockAdminData.totalStudents.toString()}
           label="Total Estudiantes"
-          icon={Users}
+          subtitle=""
+          icon={Users as React.ElementType}
           color="blue"
         />
         <StatsCard
+          id="admin-stat-teachers"
           value={mockAdminData.totalTeachers.toString()}
           label="Total Docentes"
-          icon={Users}
+          subtitle=""
+          icon={Users as React.ElementType}
           color="green"
         />
         <StatsCard
+          id="admin-stat-courses"
           value={mockAdminData.totalCourses.toString()}
           label="Total Cursos"
-          icon={BookOpen}
+          subtitle=""
+          icon={BookOpen as React.ElementType}
           color="purple"
         />
         <StatsCard
+          id="admin-stat-events"
           value={mockAdminData.upcomingEvents.toString()}
           label="Próximos Eventos"
-          icon={CalendarDays}
+          subtitle=""
+          icon={CalendarDays as React.ElementType}
           color="orange"
         />
       </div>

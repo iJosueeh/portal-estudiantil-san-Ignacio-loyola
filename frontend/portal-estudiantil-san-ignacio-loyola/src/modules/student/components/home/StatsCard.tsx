@@ -7,6 +7,7 @@ export const StatsCard: React.FC<Stats> = ({ value, label, icon: Icon, color }) 
     blue: "text-primary",
     orange: "text-secondary",
     purple: "text-purple-600",
+    red: "text-red-600", // Added red color class
   };
 
   const iconBgClasses = {
@@ -14,6 +15,7 @@ export const StatsCard: React.FC<Stats> = ({ value, label, icon: Icon, color }) 
     blue: "bg-primary/10",
     orange: "bg-secondary/10",
     purple: "bg-purple-600/10",
+    red: "bg-red-500/10", // Added red icon background class
   };
 
   return (

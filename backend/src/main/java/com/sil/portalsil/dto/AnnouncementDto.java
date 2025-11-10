@@ -15,7 +15,7 @@ public class AnnouncementDto {
     private String title;
     private String content;
     private LocalDateTime date;
-    private Long authorId; // Reference to User's ID
+    private Long authorId;
     private Role targetRole;
-    private Long courseId; // Optional reference to Course's ID
+    private Long courseId;
 }

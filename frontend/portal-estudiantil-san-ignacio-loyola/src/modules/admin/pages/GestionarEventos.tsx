@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card } from '@/shared/components/Card';
 import { CalendarDays, Clock, MapPin, Edit, Trash2, PlusCircle, Search } from 'lucide-react';
 import { format } from 'date-fns';

@@ -1,4 +1,3 @@
-import React from "react";
 import { BookMarked } from "lucide-react";
 import { CourseCard } from "../components/courses/CourseCard";
 import { coursesData } from "./_coursesData";

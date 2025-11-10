@@ -22,7 +22,6 @@ public class StudentService {
     @Autowired
     private UserRepository userRepository;
 
-    // Helper method to convert Entity to DTO
     private StudentDto convertToDto(Student student) {
         if (student == null) {
             return null;
@@ -38,13 +37,12 @@ public class StudentService {
         );
     }
 
-    // Helper method to convert DTO to Entity (for creation/update)
     private Student convertToEntity(StudentDto studentDto) {
         if (studentDto == null) {
             return null;
         }
         Student student = new Student();
-        student.setId(studentDto.getId()); // ID might be null for new students
+        student.setId(studentDto.getId());
         student.setStudentCode(studentDto.getStudentCode());
         student.setGrade(studentDto.getGrade());
         student.setSection(studentDto.getSection());

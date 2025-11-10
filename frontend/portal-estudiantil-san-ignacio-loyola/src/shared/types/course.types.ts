@@ -1,16 +1,17 @@
-import type { User } from "./user.types";
+import React from "react";
+import type { UserDto } from "./user.types";
 
 export interface Course {
   id: string;
   name: string;
-  teacher: User;
+  teacher: UserDto;
   credits: number;
-  students: User[];
+  students: UserDto[];
   createdAt: string;
   updatedAt: string;
   // Properties from the component
   professor: string;
   progress: number;
-  icon: string;
+  icon: React.ElementType;
   color: "blue" | "green" | "purple" | "orange";
 }

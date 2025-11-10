@@ -1,6 +1,5 @@
-import React from 'react';
 import { Card } from '@/shared/components/Card';
-import { BookOpen, Users, ClipboardCheck, Award } from 'lucide-react';
+import { BookOpen, Users, ClipboardCheck } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface TeacherCourse {

@@ -73,7 +73,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course }) => { // Remove
             <FileText className="w-4 h-4" />
           </div>
           <div className="text-lg font-semibold text-neutral-800">
-            {course.materials}
+            {course.materials.length}
           </div>
           <div className="text-xs text-neutral-500">materiales</div>
         </div>
@@ -82,7 +82,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course }) => { // Remove
             <Video className="w-4 h-4" />
           </div>
           <div className="text-lg font-semibold text-neutral-800">
-            {course.videos}
+            {course.videos.length}
           </div>
           <div className="text-xs text-neutral-500">videos</div>
         </div>
@@ -91,7 +91,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({ course }) => { // Remove
             <Users className="w-4 h-4" />
           </div>
           <div className="text-lg font-semibold text-neutral-800">
-            {course.students}
+            {course.students.length}
           </div>
           <div className="text-xs text-neutral-500">estudiantes</div>
         </div>
