@@ -38,4 +38,7 @@ public class Teacher {
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Grade> grades = new HashSet<>();
+
+    @OneToMany(mappedBy = "recordedBy", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Attendance> recordedAttendances = new HashSet<>();
 }

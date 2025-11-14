@@ -45,4 +45,10 @@ public class Student {
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Grade> grades = new HashSet<>();
+
+    @ManyToMany(mappedBy = "children", fetch = FetchType.LAZY)
+    private Set<Parent> parents = new HashSet<>();
+
+    @OneToMany(mappedBy = "student", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Attendance> attendances = new HashSet<>();
 }
