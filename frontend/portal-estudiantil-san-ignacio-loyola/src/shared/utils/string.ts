@@ -1,4 +1,3 @@
-
 export const getInitials = (name: string) => {
   return name
     .split(" ")

@@ -1,53 +1,71 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card } from '@/shared/components/Card';
 import { User, Mail, KeyRound, Edit, Trash2, PlusCircle, Search } from 'lucide-react';
-import { Modal } from '@/shared/components/Modal'; // Import the Modal component
-
-interface UserData {
-  id: string;
-  name: string;
-  email: string;
-  role: 'student' | 'teacher' | 'parent' | 'admin';
-  status: 'active' | 'inactive';
-}
-
-const mockUsers: UserData[] = [
-  { id: 'u1', name: 'Sofía Rodríguez', email: 'sofia.r@sanignacio.edu.pe', role: 'student', status: 'active' },
-  { id: 'u2', name: 'Pedro Gómez', email: 'pedro.g@sanignacio.edu.pe', role: 'student', status: 'active' },
-  { id: 'u3', name: 'Prof. Ana García', email: 'ana.g@sanignacio.edu.pe', role: 'teacher', status: 'active' },
-  { id: 'u4', name: 'Prof. Carlos Pérez', email: 'carlos.p@sanignacio.edu.pe', role: 'teacher', status: 'active' },
-  { id: 'u5', name: 'María Rodríguez', email: 'maria.r@example.com', role: 'parent', status: 'active' },
-  { id: 'u6', name: 'Juan Pérez (Admin)', email: 'juan.p@admin.com', role: 'admin', status: 'active' },
-  { id: 'u7', name: 'Laura Torres', email: 'laura.t@sanignacio.edu.pe', role: 'student', status: 'inactive' },
-];
+import { Modal } from '@/shared/components/Modal';
+import useUsers from '@/shared/hooks/useUsers';
+import type { UserDto, UserCreationDto, UserUpdateDto, UserRole } from '@/shared/types/user.types';
+import { toast } from 'react-toastify'; // Import toast
 
 export const GestionarUsuarios = () => {
+  const {
+    users,
+    isLoadingUsers,
+    usersError,
+    createUserMutation,
+    updateUserMutation,
+    deleteUserMutation,
+    updateUserPasswordMutation,
+  } = useUsers();
+
   const [searchTerm, setSearchTerm] = useState('');
-  const [filterRole, setFilterRole] = useState<'all' | UserData['role']>('all');
+  const [filterRole, setFilterRole] = useState<'all' | UserRole>('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalType, setModalType] = useState<'create' | 'edit' | 'delete' | 'resetPassword' | null>(null);
-  const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
+  const [selectedUser, setSelectedUser] = useState<UserDto | null>(null);
 
-  const filteredUsers = mockUsers.filter(user => {
-    const matchesSearch = user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                          user.email.toLowerCase().includes(searchTerm.toLowerCase());
+  const [formFirstName, setFormFirstName] = useState('');
+  const [formLastName, setFormLastName] = useState('');
+  const [formUsername, setFormUsername] = useState('');
+  const [formRole, setFormRole] = useState<UserRole>('STUDENT');
+  const [formIsActive, setFormIsActive] = useState(true);
+  const [formPassword, setFormPassword] = useState('');
+
+  const filteredUsers = (users || []).filter(user => {
+    const matchesSearch = user.firstName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          user.lastName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                          user.username.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesRole = filterRole === 'all' || user.role === filterRole;
     return matchesSearch && matchesRole;
   });
 
-  const getRoleColor = (role: UserData['role']) => {
+  const getRoleColor = (role: UserRole) => {
     switch (role) {
-      case 'student': return 'bg-blue-100 text-blue-800';
-      case 'teacher': return 'bg-green-100 text-green-800';
-      case 'parent': return 'bg-purple-100 text-purple-800';
-      case 'admin': return 'bg-red-100 text-red-800';
+      case 'STUDENT': return 'bg-blue-100 text-blue-800';
+      case 'TEACHER': return 'bg-green-100 text-green-800';
+      case 'PARENT': return 'bg-purple-100 text-purple-800';
+      case 'ADMIN': return 'bg-red-100 text-red-800';
       default: return 'bg-neutral-100 text-neutral-800';
     }
   };
 
-  const openModal = (type: typeof modalType, user?: UserData) => {
+  const openModal = (type: typeof modalType, user?: UserDto) => {
     setModalType(type);
     setSelectedUser(user || null);
+    if (user) {
+      setFormFirstName(user.firstName);
+      setFormLastName(user.lastName);
+      setFormUsername(user.username);
+      setFormRole(user.role);
+      setFormIsActive(user.isActive);
+      setFormPassword('');
+    } else {
+      setFormFirstName('');
+      setFormLastName('');
+      setFormUsername('');
+      setFormRole('STUDENT');
+      setFormIsActive(true);
+      setFormPassword('');
+    }
     setIsModalOpen(true);
   };
 
@@ -55,97 +73,130 @@ export const GestionarUsuarios = () => {
     setIsModalOpen(false);
     setModalType(null);
     setSelectedUser(null);
+    setFormFirstName('');
+    setFormLastName('');
+    setFormUsername('');
+    setFormRole('STUDENT');
+    setFormIsActive(true);
+    setFormPassword('');
   };
 
-  const handleConfirmAction = () => {
+  const handleConfirmAction = async () => {
     if (!selectedUser && modalType !== 'create') {
-      alert('Error: No user selected for this action.');
+      toast.error('Error: No user selected for this action.');
       return;
     }
 
-    switch (modalType) {
-      case 'create':
-        alert('Lógica para crear nuevo usuario.');
-        // Implement actual create logic here
-        break;
-      case 'edit':
-        alert(`Lógica para editar usuario: ${selectedUser?.name}`);
-        // Implement actual edit logic here
-        break;
-      case 'delete':
-        alert(`Lógica para eliminar usuario: ${selectedUser?.name}`);
-        // Implement actual delete logic here
-        break;
-      case 'resetPassword':
-        alert(`Lógica para restablecer contraseña de: ${selectedUser?.name}`);
-        // Implement actual password reset logic here
-        break;
-      default:
-        break;
+    try {
+      switch (modalType) {
+        case 'create':
+          { const newUser: UserCreationDto = {
+            firstName: formFirstName,
+            lastName: formLastName,
+            username: formUsername,
+            email: formUsername,
+            role: formRole,
+            isActive: formIsActive,
+            password: formPassword,
+          };
+          await createUserMutation.mutateAsync(newUser);
+          toast.success('Usuario creado exitosamente.');
+          break; }
+        case 'edit':
+          if (selectedUser?.id) {
+            const updatedUser: UserUpdateDto = {
+              id: selectedUser.id,
+              firstName: formFirstName,
+              lastName: formLastName,
+              username: formUsername,
+              role: formRole,
+              isActive: formIsActive,
+            };
+            await updateUserMutation.mutateAsync({ id: selectedUser.id, user: updatedUser });
+            toast.success('Usuario actualizado exitosamente.');
+          }
+          break;
+        case 'delete':
+          if (selectedUser?.id) {
+            await deleteUserMutation.mutateAsync(selectedUser.id);
+            toast.success('Usuario eliminado exitosamente.');
+          }
+          break;
+        case 'resetPassword':
+          if (selectedUser?.id && formPassword) {
+            await updateUserPasswordMutation.mutateAsync({ id: selectedUser.id, newPassword: formPassword });
+            toast.success('Contraseña restablecida exitosamente.');
+          } else {
+            toast.error('Por favor, introduce una nueva contraseña.');
+            return;
+          }
+          break;
+        default:
+          break;
+      }
+      closeModal();
+    } catch (e: unknown) {
+      toast.error(`Error: ${ (e as Error).message || 'Ocurrió un error.'}`);
     }
-    closeModal();
   };
 
   const renderModalContent = () => {
     switch (modalType) {
       case 'create':
-        return (
-          <form className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-neutral-700">Nombre</label>
-              <input type="text" className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-accent focus:ring-opacity-50" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-neutral-700">Email</label>
-              <input type="email" className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-accent focus:ring-opacity-50" />
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-neutral-700">Rol</label>
-              <select className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-opacity-50">
-                <option>student</option>
-                <option>teacher</option>
-                <option>parent</option>
-                <option>admin</option>
-              </select>
-            </div>
-          </form>
-        );
       case 'edit':
         return (
           <form className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-neutral-700">Nombre</label>
-              <input type="text" defaultValue={selectedUser?.name} className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-accent focus:ring-opacity-50" />
+              <input type="text" value={formFirstName} onChange={(e) => setFormFirstName(e.target.value)} className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-accent focus:ring-opacity-50" />
             </div>
             <div>
-              <label className="block text-sm font-medium text-neutral-700">Email</label>
-              <input type="email" defaultValue={selectedUser?.email} className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-accent focus:ring-opacity-50" />
+              <label className="block text-sm font-medium text-neutral-700">Apellido</label>
+              <input type="text" value={formLastName} onChange={(e) => setFormLastName(e.target.value)} className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-opacity-50" />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-neutral-700">Email (Usuario)</label>
+              <input type="email" value={formUsername} onChange={(e) => setFormUsername(e.target.value)} className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-opacity-50" />
             </div>
             <div>
               <label className="block text-sm font-medium text-neutral-700">Rol</label>
-              <select defaultValue={selectedUser?.role} className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-opacity-50">
-                <option>student</option>
-                <option>teacher</option>
-                <option>parent</option>
-                <option>admin</option>
+              <select value={formRole} onChange={(e) => setFormRole(e.target.value as UserRole)} className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-accent focus:ring-opacity-50">
+                <option value="STUDENT">Estudiante</option>
+                <option value="TEACHER">Docente</option>
+                <option value="PARENT">Padre</option>
+                <option value="ADMIN">Administrador</option>
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium text-neutral-700">Estado</label>
-              <select defaultValue={selectedUser?.status} className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-opacity-50">
-                <option>active</option>
-                <option>inactive</option>
-              </select>
-            </div>
+            {modalType === 'create' && (
+              <div>
+                <label className="block text-sm font-medium text-neutral-700">Contraseña</label>
+                <input type="password" value={formPassword} onChange={(e) => setFormPassword(e.target.value)} className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-accent focus:ring-opacity-50" />
+              </div>
+            )}
+            {modalType === 'edit' && (
+              <div>
+                <label className="block text-sm font-medium text-neutral-700">Estado</label>
+                <select value={formIsActive ? 'active' : 'inactive'} onChange={(e) => setFormIsActive(e.target.value === 'active')} className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-accent focus:ring-opacity-50">
+                  <option value="active">Activo</option>
+                  <option value="inactive">Inactivo</option>
+                </select>
+              </div>
+            )}
           </form>
         );
       case 'delete':
         return (
-          <p>¿Estás seguro de que quieres eliminar al usuario **{selectedUser?.name}**?</p>
+          <p>¿Estás seguro de que quieres eliminar al usuario **{selectedUser?.firstName} {selectedUser?.lastName}**?</p>
         );
       case 'resetPassword':
         return (
-          <p>¿Estás seguro de que quieres restablecer la contraseña de **{selectedUser?.name}**?</p>
+          <form className="space-y-4">
+            <p>¿Estás seguro de que quieres restablecer la contraseña de **{selectedUser?.firstName} {selectedUser?.lastName}**?</p>
+            <div>
+              <label className="block text-sm font-medium text-neutral-700">Nueva Contraseña</label>
+              <input type="password" value={formPassword} onChange={(e) => setFormPassword(e.target.value)} className="mt-1 block w-full rounded-md border-neutral-300 shadow-sm focus:border-accent focus:ring focus:ring-accent focus:ring-opacity-50" />
+            </div>
+          </form>
         );
       default:
         return null;
@@ -155,12 +206,20 @@ export const GestionarUsuarios = () => {
   const getModalTitle = () => {
     switch (modalType) {
       case 'create': return 'Crear Nuevo Usuario';
-      case 'edit': return `Editar Usuario: ${selectedUser?.name}`;
+      case 'edit': return `Editar Usuario: ${selectedUser?.firstName} ${selectedUser?.lastName}`;
       case 'delete': return 'Confirmar Eliminación';
       case 'resetPassword': return 'Restablecer Contraseña';
       default: return '';
     }
   };
+
+  if (isLoadingUsers) {
+    return <Card className="p-6 text-center">Cargando usuarios...</Card>;
+  }
+
+  if (usersError) {
+    return <Card className="p-6 text-center text-red-500">Error: {usersError.message}</Card>;
+  }
 
   return (
     <Card className="p-6">
@@ -171,7 +230,7 @@ export const GestionarUsuarios = () => {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-neutral-400 w-5 h-5" />
           <input
             type="text"
-            placeholder="Buscar por nombre o email..."
+            placeholder="Buscar por nombre, apellido o email..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="w-full pl-10 pr-4 py-2 bg-neutral-100 border-2 border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-accent"
@@ -181,14 +240,14 @@ export const GestionarUsuarios = () => {
         <div className="flex gap-2 w-full md:w-auto">
           <select
             value={filterRole}
-            onChange={(e) => setFilterRole(e.target.value as 'all' | UserData['role'])}
+            onChange={(e) => setFilterRole(e.target.value as 'all' | UserRole)}
             className="px-4 py-2 bg-neutral-100 border-2 border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-accent"
           >
             <option value="all">Todos los Roles</option>
-            <option value="student">Estudiante</option>
-            <option value="teacher">Docente</option>
-            <option value="parent">Padre</option>
-            <option value="admin">Administrador</option>
+            <option value="STUDENT">Estudiante</option>
+            <option value="TEACHER">Docente</option>
+            <option value="PARENT">Padre</option>
+            <option value="ADMIN">Administrador</option>
           </select>
           <button
             onClick={() => openModal('create')}
@@ -205,10 +264,10 @@ export const GestionarUsuarios = () => {
           <thead className="bg-primary">
             <tr>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                Nombre
+                Nombre Completo
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                Email
+                Email (Usuario)
               </th>
               <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                 Rol
@@ -226,19 +285,19 @@ export const GestionarUsuarios = () => {
               filteredUsers.map(user => (
                 <tr key={user.id}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-neutral-900 flex items-center gap-2">
-                    <User className="w-4 h-4 text-primary" /> {user.name}
+                    <User className="w-4 h-4 text-primary" /> {user.firstName} {user.lastName}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-neutral-800">
-                    <Mail className="w-4 h-4 inline-block mr-2 text-accent" />{user.email}
+                    <Mail className="w-4 h-4 inline-block mr-2 text-accent" />{user.username}
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
                     <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getRoleColor(user.role)}`}>
-                      {user.role.charAt(0).toUpperCase() + user.role.slice(1)}
+                      {user.role.charAt(0).toUpperCase() + user.role.slice(1).toLowerCase()}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm">
-                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${user.status === 'active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                      {user.status === 'active' ? 'Activo' : 'Inactivo'}
+                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${user.isActive ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                      {user.isActive ? 'Activo' : 'Inactivo'}
                     </span>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-left text-sm font-medium">

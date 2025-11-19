@@ -1,6 +1,6 @@
-import { TrendingUp, Book, FileText, Users } from "lucide-react";
+import { TrendingUp, Book, FileText, Users, BookOpen } from "lucide-react";
 import type { Stats } from "@/shared/types/stats.types";
-import type { Course } from "@/shared/types/course.types";
+import type { StudentCourse } from "../types/student-course.types";
 import type { Event } from "@/shared/types/event.types";
 
 export const statsData: Stats[] = [
@@ -38,19 +38,23 @@ export const statsData: Stats[] = [
   },
 ];
 
-export const coursesData: Course[] = [
+export const coursesData: StudentCourse[] = [
   {
     id: "1",
     name: "Matemáticas",
     professor: "Prof. García",
     progress: 75,
     color: "blue",
-    icon: "📘",
-    teacher: {} as any, // Add dummy data to satisfy the type
-    credits: 0,
+    icon: BookOpen,
+    teacher: { id: 1, firstName: "María", lastName: "García", email: "maria.garcia@example.com", username: "maria.garcia", role: "TEACHER", isActive: true },
+    credits: 4,
     students: [],
-    createdAt: "",
-    updatedAt: "",
+    createdAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z",
+    schedule: "Lunes, Miércoles, Viernes 08:00 - 09:30 AM",
+    nextClass: "Miércoles 08:00 AM",
+    materials: [],
+    videos: [],
   },
   {
     id: "2",
@@ -58,12 +62,16 @@ export const coursesData: Course[] = [
     professor: "Prof. Rodríguez",
     progress: 82,
     color: "green",
-    icon: "📗",
-    teacher: {} as any,
-    credits: 0,
+    icon: BookOpen,
+    teacher: { id: 2, firstName: "Roberto", lastName: "Rodríguez", email: "roberto.rodriguez@example.com", username: "roberto.rodriguez", role: "TEACHER", isActive: true },
+    credits: 3,
     students: [],
-    createdAt: "",
-    updatedAt: "",
+    createdAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z",
+    schedule: "Martes, Jueves 10:00 - 11:30 AM",
+    nextClass: "Jueves 10:00 AM",
+    materials: [],
+    videos: [],
   },
   {
     id: "3",
@@ -71,12 +79,16 @@ export const coursesData: Course[] = [
     professor: "Prof. Silva",
     progress: 68,
     color: "purple",
-    icon: "📕",
-    teacher: {} as any,
-    credits: 0,
+    icon: BookOpen,
+    teacher: { id: 3, firstName: "Ana", lastName: "Silva", email: "ana.silva@example.com", username: "ana.silva", role: "TEACHER", isActive: true },
+    credits: 3,
     students: [],
-    createdAt: "",
-    updatedAt: "",
+    createdAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z",
+    schedule: "Lunes, Miércoles 02:00 - 03:30 PM",
+    nextClass: "Lunes 02:00 PM",
+    materials: [],
+    videos: [],
   },
   {
     id: "4",
@@ -84,12 +96,16 @@ export const coursesData: Course[] = [
     professor: "Prof. López",
     progress: 90,
     color: "orange",
-    icon: "📙",
-    teacher: {} as any,
-    credits: 0,
+    icon: BookOpen,
+    teacher: { id: 4, firstName: "Carlos", lastName: "López", email: "carlos.lopez@example.com", username: "carlos.lopez", role: "TEACHER", isActive: true },
+    credits: 4,
     students: [],
-    createdAt: "",
-    updatedAt: "",
+    createdAt: "2024-01-01T00:00:00Z",
+    updatedAt: "2024-01-01T00:00:00Z",
+    schedule: "Martes, Viernes 11:00 - 12:30 PM",
+    nextClass: "Martes 11:00 AM",
+    materials: [],
+    videos: [],
   },
 ];
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card } from '@/shared/components/Card';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { CheckCircle, Clock, XCircle, AlertCircle, BookOpen, CalendarDays, Upload } from 'lucide-react'; // Added Upload icon
+import { CheckCircle, Clock, AlertCircle, BookOpen, CalendarDays, Upload } from 'lucide-react'; // Added Upload icon
 import { Modal } from '@/shared/components/Modal'; // Import Modal component
 
 interface Task {

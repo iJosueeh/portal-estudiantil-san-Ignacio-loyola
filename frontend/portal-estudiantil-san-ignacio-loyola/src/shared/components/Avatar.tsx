@@ -1,9 +1,9 @@
-import type { HTMLAttributes } from "react";
-
-interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
+interface AvatarProps {
   name: string;
   imageUrl?: string | null;
   size?: "sm" | "md" | "lg";
+  className?: string; // Added className explicitly
+  onClick?: () => void; // Added onClick explicitly if needed
 }
 
 /**
@@ -33,7 +33,7 @@ export const Avatar = ({
   imageUrl,
   size = "md",
   className,
-  ...props
+  onClick, // Destructure onClick
 }: AvatarProps) => {
   const initials = getInitials(name);
 
@@ -49,7 +49,7 @@ export const Avatar = ({
   return (
     <div
       className={`${baseClasses} ${sizeClasses[size]} ${className}`}
-      {...props}
+      onClick={onClick} // Pass onClick to the div
     >
       {imageUrl ? (
         <img

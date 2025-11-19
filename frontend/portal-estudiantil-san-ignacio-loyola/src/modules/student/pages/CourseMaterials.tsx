@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card } from '@/shared/components/Card';
-import { FileText, Link as LinkIcon, ChevronLeft, Download, Video, BookOpen, CalendarDays } from 'lucide-react';
+import { FileText, Link as LinkIcon, ChevronLeft, Download, Video, BookOpen } from 'lucide-react';
 
 interface MaterialItem {
   id: string;

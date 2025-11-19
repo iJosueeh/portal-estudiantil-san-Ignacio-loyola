@@ -13,5 +13,5 @@ public class CourseDto {
     private String description;
     private Integer credits;
     private String schedule;
-    private Long teacherId; // Reference to TeacherDto's ID
+    private Long teacherId;
 }

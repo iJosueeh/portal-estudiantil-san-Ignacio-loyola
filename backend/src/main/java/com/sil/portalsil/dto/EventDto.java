@@ -20,5 +20,5 @@ public class EventDto {
     private String location;
     private String color;
     private Event.EventType type;
-    private Long courseId; // Optional reference to Course's ID
+    private Long courseId;
 }

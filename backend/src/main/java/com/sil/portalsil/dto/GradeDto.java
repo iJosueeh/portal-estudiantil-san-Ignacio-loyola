@@ -13,7 +13,7 @@ public class GradeDto {
     private Double gradeValue;
     private Double weight;
     private String period;
-    private Long studentId; // Reference to Student's ID
-    private Long courseId;  // Reference to Course's ID
-    private Long teacherId; // Reference to Teacher's ID
+    private Long studentId;
+    private Long courseId;
+    private Long teacherId;
 }

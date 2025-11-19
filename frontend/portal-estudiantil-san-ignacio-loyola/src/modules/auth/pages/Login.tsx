@@ -1,19 +1,48 @@
 import { useState } from "react";
-import { Mail, Lock, ShieldCheck } from "lucide-react";
+import { Mail, Lock, ShieldCheck, Eye, EyeOff } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Logotipo from "../../../assets/logotipo.jpg";
+import { authService } from "@/shared/api/authService"; // Import authService
 
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const [error, setError] = useState<string | null>(null); // State for error messages
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email === "estudiante@sanignacio.edu.pe" && password === "password") {
-      navigate("/dashboard");
-    } else {
-      alert("Credenciales inválidas. Inténtalo de nuevo.");
+    setError(null); // Clear previous errors
+
+    try {
+      const response = await authService.login(email, password);
+      const role = response.role; // Get role from the response
+
+      // Add a small delay to ensure localStorage is updated before navigation
+      setTimeout(() => {
+        switch (role) {
+          case "ADMIN":
+            navigate("/dashboard-admin");
+            break;
+          case "STUDENT":
+            navigate("/dashboard"); // Assuming /dashboard is for students
+            break;
+          case "TEACHER":
+            navigate("/dashboard-docente");
+            break;
+          case "PARENT":
+            navigate("/dashboard-padre");
+            break;
+          default:
+            setError("Rol de usuario desconocido.");
+            authService.logout(); // Log out if role is unknown
+            break;
+        }
+      }, 100); // 100ms delay
+    } catch (err) {
+      setError("Credenciales inválidas. Inténtalo de nuevo.");
+      console.log(err);
     }
   };
 
@@ -66,6 +95,11 @@ export const Login = () => {
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-6">
+              {error && (
+                <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                  <span className="block sm:inline">{error}</span>
+                </div>
+              )}
               <div>
                 <label
                   htmlFor="email"
@@ -102,14 +136,21 @@ export const Login = () => {
                 <div className="relative">
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-neutral-400" />
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     id="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full pl-12 pr-4 py-3 bg-neutral-100 border-2 border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition"
+                    className="w-full pl-12 pr-12 py-3 bg-neutral-100 border-2 border-transparent rounded-xl focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition"
                     required
                   />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-neutral-600 focus:outline-none"
+                  >
+                    {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                  </button>
                 </div>
               </div>
 

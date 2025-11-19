@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import useNavigate
-import { Home, Award, BookOpen, CalendarDays, Mail, LogOut, Users, X } from 'lucide-react'; // Added X
+import { Home, Award, BookOpen, CalendarDays, Mail, LogOut, X } from 'lucide-react'; // Added X
 import Logotipo from '@/assets/logotipo.jpg';
 import { logout } from '@/shared/utils/auth'; // Import logout function
 

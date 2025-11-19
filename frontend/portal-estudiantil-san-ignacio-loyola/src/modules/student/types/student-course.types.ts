@@ -1,13 +1,8 @@
-export interface StudentCourse {
-  id: string;
-  name: string;
-  professor: string;
+import type { Course } from "@/shared/types/course.types";
+
+export interface StudentCourse extends Course {
   schedule: string;
   nextClass: string;
-  materials: number;
-  videos: number;
-  students: number;
-  progress: number;
-  color: "blue" | "green" | "purple" | "orange";
-  icon: string; // Added icon property
+  materials: { name: string; url: string; type: 'file' | 'link' }[];
+  videos: { name: string; url: string }[];
 }

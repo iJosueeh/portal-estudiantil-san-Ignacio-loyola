@@ -4,7 +4,7 @@ import { Card } from "@/shared/components/Card";
 
 interface EventCardProps {
   event: Event;
-  onViewDetails: () => void; // Added onViewDetails prop
+  onViewDetails?: () => void; // Made onViewDetails optional
 }
 
 export const EventCard: React.FC<EventCardProps> = ({ event, onViewDetails }) => {
@@ -46,7 +46,7 @@ export const EventCard: React.FC<EventCardProps> = ({ event, onViewDetails }) =>
             </div>
           )}
           {event.time && (
-            <div className={`text-xs text-neutral-600 mt-1`}>
+            <div className={`text-xs text-neutral-600`}>
               {event.time}
             </div>
           )}

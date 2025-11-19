@@ -15,6 +15,6 @@ public class TaskDto {
     private String description;
     private LocalDateTime dueDate;
     private Integer maxGrade;
-    private Long courseId;  // Reference to Course's ID
-    private Long teacherId; // Reference to Teacher's ID
+    private Long courseId;
+    private Long teacherId;
 }

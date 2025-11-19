@@ -1,10 +1,11 @@
 import React from 'react';
-import { Bell, Menu, Search, User } from 'lucide-react';
+import { Bell, Menu, Search } from 'lucide-react';
 import { getInitials } from '@/shared/utils/string';
 
 interface HeaderProps {
   toggleSidebar: () => void;
   userName: string;
+  role: 'student' | 'parent' | 'teacher' | 'admin';
 }
 
 export const Header: React.FC<HeaderProps> = ({ toggleSidebar, userName }) => {

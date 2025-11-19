@@ -1,5 +1,5 @@
 import React from "react";
-import { ElementType } from "react";
+import type { ElementType } from "react";
 
 interface InfoBannerProps {
   icon: ElementType;

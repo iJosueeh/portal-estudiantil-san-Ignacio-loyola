@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card } from '@/shared/components/Card';
 import { User, Mail, Phone, Calendar, BookOpen, GraduationCap, KeyRound } from 'lucide-react';
 import { Avatar } from '@/shared/components/Avatar'; // Assuming an Avatar component exists
@@ -110,7 +110,7 @@ export const Perfil = () => {
 
       {/* Profile Header */}
       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 pb-8 border-b border-neutral-200 mb-8">
-        <Avatar src={mockStudentProfile.profilePicture} alt={mockStudentProfile.name} size="lg" />
+        <Avatar imageUrl={mockStudentProfile.profilePicture} name={mockStudentProfile.name} size="lg" />
         <div className="text-center sm:text-left">
           <h2 className="text-3xl font-bold text-primary">{mockStudentProfile.name}</h2>
           <p className="text-lg text-neutral-600">Código: {mockStudentProfile.studentCode}</p>

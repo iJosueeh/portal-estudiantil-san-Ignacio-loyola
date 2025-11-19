@@ -5,6 +5,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "parents")
 @Data
@@ -22,5 +25,18 @@ public class Parent {
 
     private String contactNumber;
 
-    // Relationships with Student (Many-to-Many) will be added later
+    private String address;
+
+    private String occupation;
+
+    @Column(nullable = false)
+    private String relationship;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+        name = "parent_student",
+        joinColumns = @JoinColumn(name = "parent_id"),
+        inverseJoinColumns = @JoinColumn(name = "student_id")
+    )
+    private Set<Student> children = new HashSet<>();
 }
