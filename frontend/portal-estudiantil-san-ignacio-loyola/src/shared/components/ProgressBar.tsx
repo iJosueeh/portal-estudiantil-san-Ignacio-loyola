@@ -2,7 +2,7 @@ import React from "react";
 
 interface ProgressBarProps {
   percentage: number;
-  color?: "blue" | "green" | "orange" | "purple";
+  color?: "blue" | "green" | "orange" | "purple" | "primary";
 }
 
 export const ProgressBar: React.FC<ProgressBarProps> = ({ percentage, color = "blue" }) => {
@@ -11,6 +11,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({ percentage, color = "b
     green: "from-green-600 to-green-400",
     orange: "from-orange-600 to-orange-400",
     purple: "from-purple-600 to-purple-400",
+    primary: "from-primary-600 to-primary-400", // Added primary color class
   };
 
   return (

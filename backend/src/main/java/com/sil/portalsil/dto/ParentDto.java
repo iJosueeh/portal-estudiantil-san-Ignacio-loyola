@@ -9,6 +9,6 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ParentDto {
     private Long id;
-    private Long userId; // Reference to UserDto's ID
+    private Long userId;
     private String contactNumber;
 }

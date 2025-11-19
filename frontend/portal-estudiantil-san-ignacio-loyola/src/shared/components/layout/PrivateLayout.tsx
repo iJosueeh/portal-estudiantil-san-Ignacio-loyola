@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sidebar } from '@/modules/student/components/Sidebar';
 import { Header } from '@/modules/student/components/Header';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
 import { ParentSidebar } from '@/modules/parent/components/ParentSidebar'; // Import ParentSidebar
 import { TeacherSidebar } from '@/modules/teacher/components/TeacherSidebar'; // Import TeacherSidebar
 import { AdminSidebar } from '@/modules/admin/components/AdminSidebar'; // Import AdminSidebar
+import { authService } from '../../api/authService'; // Import authService
 
 interface PrivateLayoutProps {
   role: 'student' | 'parent' | 'teacher' | 'admin'; // Define role prop to include admin
@@ -12,6 +13,37 @@ interface PrivateLayoutProps {
 
 export const PrivateLayout: React.FC<PrivateLayoutProps> = ({ role }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const navigate = useNavigate();
+  const userRole = authService.getUserRole();
+
+  useEffect(() => {
+    if (!authService.isAuthenticated()) {
+      navigate('/login');
+      return;
+    }
+
+    if (userRole !== role) {
+      // Redirect to appropriate dashboard if role doesn't match
+      switch (userRole) {
+        case 'ADMIN':
+          navigate('/dashboard-admin');
+          break;
+        case 'STUDENT':
+          navigate('/dashboard');
+          break;
+        case 'TEACHER':
+          navigate('/dashboard-docente');
+          break;
+        case 'PARENT':
+          navigate('/dashboard-padre');
+          break;
+        default:
+          authService.logout();
+          navigate('/login');
+          break;
+      }
+    }
+  }, [role, navigate, userRole]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);

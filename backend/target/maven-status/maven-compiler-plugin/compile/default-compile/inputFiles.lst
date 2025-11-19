@@ -1,4 +1,13 @@
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\config\AppConfig.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\config\JwtRequestFilter.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\config\SecurityConfig.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\controller\AuthController.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\controller\ParentController.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\controller\TeacherController.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\controller\UserController.java
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\dto\AnnouncementDto.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\dto\AuthRequest.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\dto\AuthResponse.java
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\dto\CourseDto.java
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\dto\EnrollmentDto.java
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\dto\EventDto.java
@@ -25,6 +34,8 @@ C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\entity\Teacher.java
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\entity\User.java
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\enums\Role.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\exception\ResourceNotFoundException.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\exception\UserNotFoundException.java
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\PortalsilApplication.java
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\repository\AnnouncementRepository.java
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\repository\CourseRepository.java
@@ -39,3 +50,9 @@ C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\repository\TaskSubmissionRepository.java
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\repository\TeacherRepository.java
 C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\repository\UserRepository.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\service\MyUserDetailsService.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\service\ParentService.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\service\StudentService.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\service\TeacherService.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\service\UserService.java
+C:\Users\HOME\Documents\GitHub\portal-estudiantil-san-Ignacio-loyola\backend\src\main\java\com\sil\portalsil\util\JwtUtil.java

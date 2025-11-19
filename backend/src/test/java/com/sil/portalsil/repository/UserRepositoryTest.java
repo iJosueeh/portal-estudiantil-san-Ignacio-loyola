@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
+import org.springframework.test.context.ActiveProfiles; // Import ActiveProfiles
 
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -14,7 +15,8 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = Replace.NONE) // Use the actual database configured (H2 in-memory)
+@AutoConfigureTestDatabase(replace = Replace.ANY) // Use an embedded database for tests
+@ActiveProfiles("test") // Activate the 'test' profile
 public class UserRepositoryTest {
 
     @Autowired

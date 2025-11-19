@@ -3,6 +3,7 @@ import React from "react";
 interface CardProps {
   children: React.ReactNode;
   className?: string;
+  onClick?: () => void; // Added onClick prop
 }
 
 export const Card: React.FC<CardProps> = ({ children, className }) => {

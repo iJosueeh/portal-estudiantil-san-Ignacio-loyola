@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Card } from '@/shared/components/Card';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { CheckCircle, Clock, AlertCircle, BookOpen, User, CalendarDays, FileText, ChevronLeft, Save } from 'lucide-react';
+import { Clock, User, CalendarDays, FileText, ChevronLeft, Save } from 'lucide-react';
 
 interface SubmittedTask {
   id: string;
@@ -11,6 +11,7 @@ interface SubmittedTask {
   studentId: string;
   taskTitle: string;
   course: string;
+  description?: string; // Added description property
   dueDate: string; // YYYY-MM-DD
   submissionDate: string; // YYYY-MM-DD
   status: 'pending_review' | 'reviewed' | 'late_submission';

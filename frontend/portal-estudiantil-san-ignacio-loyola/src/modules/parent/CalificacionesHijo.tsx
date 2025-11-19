@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card } from '@/shared/components/Card';
-import { BookOpen, Award, TrendingUp } from 'lucide-react';
 
 interface Evaluation {
   name: string;

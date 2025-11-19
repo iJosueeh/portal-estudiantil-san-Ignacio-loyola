@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card } from '@/shared/components/Card';
-import { Send, MessageSquare, User, Mail as MailIcon, CheckCircle, XCircle } from 'lucide-react'; // Added CheckCircle, XCircle
+import { Send, CheckCircle, XCircle } from 'lucide-react'; // Added CheckCircle, XCircle
 import { Modal } from '@/shared/components/Modal'; // Import the Modal component
 import { format } from 'date-fns';
 

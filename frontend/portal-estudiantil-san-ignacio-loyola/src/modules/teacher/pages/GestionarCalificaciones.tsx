@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Card } from '@/shared/components/Card';
-import { Award, User, BookOpen, Edit, Save, CheckCircle, XCircle } from 'lucide-react'; // Added CheckCircle, XCircle
+import { User, Edit, Save, CheckCircle, XCircle } from 'lucide-react'; // Added CheckCircle, XCircle
 import { Modal } from '@/shared/components/Modal'; // Import Modal component
 
 interface StudentGrade {

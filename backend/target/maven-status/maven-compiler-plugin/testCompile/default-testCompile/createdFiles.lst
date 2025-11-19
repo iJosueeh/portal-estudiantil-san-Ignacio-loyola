@@ -1,2 +1,3 @@
-com\sil\portalsil\PortalsilApplicationTests.class
+com\sil\portalsil\controller\UserControllerTest.class
+com\sil\portalsil\config\TestSecurityConfig.class
 com\sil\portalsil\repository\UserRepositoryTest.class

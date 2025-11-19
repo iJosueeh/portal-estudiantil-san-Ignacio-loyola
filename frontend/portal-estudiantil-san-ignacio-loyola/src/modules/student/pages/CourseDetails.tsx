@@ -1,7 +1,6 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Card } from '@/shared/components/Card';
-import { BookOpen, User, Clock, CalendarDays, FileText, Video, MessageSquare, ChevronLeft, Users } from 'lucide-react'; // Added Users
+import { BookOpen, User, Clock, FileText, Video, ChevronLeft, Users, Link as LinkIcon } from 'lucide-react'; // Added Users, LinkIcon
 import { Link } from 'react-router-dom';
 
 interface CourseDetailData {
@@ -253,7 +252,7 @@ export const CourseDetails = () => {
               {course.materials.length > 0 ? (
                 course.materials.map((material, index) => (
                   <a key={index} href={material.url} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 p-3 bg-neutral-50 rounded-lg hover:bg-neutral-100 transition border border-neutral-200">
-                    {material.type === 'file' ? <FileText className="w-5 h-5 text-primary" /> : <Link className="w-5 h-5 text-accent" />}
+                    {material.type === 'file' ? <FileText className="w-5 h-5 text-primary" /> : <LinkIcon className="w-5 h-5 text-accent" />}
                     <span className="text-neutral-800">{material.name}</span>
                   </a>
                 ))

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { CalendarDays, Clock, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface AcademicEvent {

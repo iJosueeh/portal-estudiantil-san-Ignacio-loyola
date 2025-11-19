@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Card } from '@/shared/components/Card';
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
-import { CheckCircle, Clock, AlertCircle, BookOpen, User, CalendarDays, FileText } from 'lucide-react';
+import { CheckCircle, Clock, AlertCircle, BookOpen, User, CalendarDays } from 'lucide-react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 interface SubmittedTask {

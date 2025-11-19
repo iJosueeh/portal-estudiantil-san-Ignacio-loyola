@@ -18,5 +18,5 @@ public class MaterialDto {
     private String url;
     private LocalDate uploadDate;
     private Integer week;
-    private Long courseId; // Reference to Course's ID
+    private Long courseId;
 }

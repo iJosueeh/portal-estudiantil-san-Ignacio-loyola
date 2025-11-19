@@ -1,5 +1,3 @@
-import { useNavigate } from 'react-router-dom';
-
 // Mock authentication functions
 export const login = (username: string, password: string, role: string): boolean => {
   // In a real app, this would involve API calls and token validation

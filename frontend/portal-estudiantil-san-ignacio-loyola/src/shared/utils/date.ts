@@ -1,4 +1,3 @@
-
 export const getCurrentDate = () => {
   return new Date().toLocaleDateString("es-ES", {
     weekday: "long",
